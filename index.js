@@ -28,6 +28,8 @@ app.set("view engine", "handlebars");
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use('/static', express.static(__dirname + '/static'));
+app.use('/img', express.static(__dirname + '/img'));
+
 app.use(async (req, res, next) => {
     const { authToken } = req.cookies;
     if(!authToken) {
@@ -61,6 +63,10 @@ app.get("/", async (req, res) => {
 
 app.get("/about", (req, res) => {
     res.render('about');
+});
+
+app.get("/team-bio", (req, res) => {
+    res.render('team-bio');
 });
 
 app.get("/register", (req, res) => {
