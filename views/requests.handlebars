@@ -1,0 +1,33 @@
+{{!--  
+Author: Sammy Romero
+Date: 12/1/2020
+Description: Transitioning everything from html to handlebars
+  --}}
+<link rel="stylesheet" href="/static/requests.css">
+<body>
+    <main class= "contentContainer" role= "main">
+        <div class= "index">
+              <form action="#">
+                <div class="container">
+                  <br>
+                  <h1 style="color: black;">Suggest a Category</h1>
+                  <hr>
+              
+                  <!-- ***** we will need to refine this later once the database for movie categories are up and running some variable names are incorrect -->
+                  <label for="cate-name"><h4><b>Give your category a name.</b></h4></label>
+                  <input type="text" style="background-color: white;" placeholder="Enter Category Name" name="cate-name" id="cate-name" required>
+
+                  <label for="cate-name"><h4><b>Description</b></h4></label>
+                  <p><i>Describe why tracking your category is important. Define any terms that might be new to people.</i></p>
+                  <textarea class="span6" rows="6" style="width: 100%; border: none;" placeholder="Write your description here." required></textarea>
+
+                  <button type="submit" class="registerbtn">Submit</button>
+                </div>
+
+                </div>
+              
+              </form>                    
+            </div>
+        </div>
+    </main>
+</body>
