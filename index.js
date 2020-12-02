@@ -95,6 +95,10 @@ app.get("/movies", (req, res) => {
     res.render('movies');
 });
 
+app.get("/account", (req, res) => {
+    res.render('account');
+});
+
 app.get("/addmovie", (req, res) => {
     res.render('addmovie');
 });
