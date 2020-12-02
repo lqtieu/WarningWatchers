@@ -58,7 +58,7 @@ app.use(async (req, res, next) =>{
 
 //Invoked everytime someone hits webpage
 app.get("/", async (req, res) =>{
-    res.render('home');
+    res.render('home',  { user: req.user });
 });
 
 app.get("/about", (req, res) => {
@@ -129,9 +129,9 @@ app.get("/requests", async (req, res) => {
 });
 
 app.get("/register", (req, res) => {
-    if(req.user) {
-        return res.redirect('/');
-    }
+    // if(req.user) {
+    //     return res.redirect('/register');
+    // }
     res.render('register');
 });
 
@@ -142,15 +142,10 @@ app.get("/login", (req, res) => {
     res.render('login');
 });
 
-app.get("/logout", (req, res) => {
-    if(req.user && req.cookies.authToken) {
-        res.clearCookie('authToken');
-        res.redirect('/');
-    }
-    else{
-    res.redirect('/login');
-    }
-});
+app.get('/logout', (req, res) =>{
+    res.clearCookie('userToken');
+    res.redirect('/');
+})
 
 app.post('/register', async (req, res) =>{
     const db = await dbPromise;
@@ -176,7 +171,7 @@ app.post('/register', async (req, res) =>{
             //keeps track of what user is registered in using cookies. also grants access to new user.
             const user = await db.get('SELECT id FROM Users WHERE email=?', email);
             const token = await grantAuthToken(user.id);
-            console.log('work');
+            console.log('user registered', user);
             res.cookie('userToken', token);
             res.redirect('/');
         }
@@ -196,13 +191,12 @@ app.post('/login', async (req, res) =>{
         //checks users email if in the database
         const existingUser = await db.get('SELECT * FROM Users WHERE email=?', email);
         if(!existingUser) { throw 'incorrect login'; }
-
         //checks users password by decrpting hash from database
         const passwordMatch = await bcrypt.compare(password, existingUser.password);
         if(!passwordMatch) { throw 'incorrect login'; }
 
         //if user has correct email and password it is grant access through grantAccess function in auth.js
-        const token = await grantAccess(existingUser.id);
+        const token = await grantAuthToken(existingUser.id);
         res.cookie('userToken', token);
         res.redirect('/');
     } catch (e) { return res.render('login', { error: e }); }

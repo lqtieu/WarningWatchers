@@ -77,23 +77,23 @@
           {{else}}
             <!-- Login Form from https://www.w3schools.com/howto/howto_css_login_form.asp -->
             <div class= "container" > 
-              <form action="#" method="post">                  
+              <form action="login" method="post">                  
                 <div class="container">
-                  <label for="uname"><h4><b>Username</b></h4></label>
-                  <input type="text" placeholder="Enter Username" name="uname" required>
+                  <label for="email"><h4><b>Email</b></h4></label>
+                  <input type="text" placeholder="Enter Username" name="email" required>
               
                   <label for="psw"><h4><b>Password</b></h4></label>
-                  <input type="password" placeholder="Enter Password" name="psw" required>
+                  <input type="password" placeholder="Enter Password" name="password" required>
               
-                  <button type="submit">Login</button>
+                  <button type="submit" href="/">Login</button>
                 </div>
-              
+              </form>
                 <div class="cnclbtn-container" style="background-color:#f1f1f1">
                   <a class="btn btn-info" href="../register" role="button" style="display: flex; justify-content: center;">Create an Account</a>
                   <!-- (LIENNA) Add forgot password page !!! Only If Time Permits-->
                   <!-- <span class="psw">Forgot <a href="#">password?</a></span> -->
                 </div>
-              </form>
+
               <br><br>
           </div>
           {{/if}}
