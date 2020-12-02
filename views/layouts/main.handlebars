@@ -67,8 +67,10 @@ Description: An interactive message board that allows for user
         aria-label="Search">
     </form> 
 
+    {{#if user}}
     <!-- NavBar button that will lead user to Account details -->
     <a class="nav-link" href="../account" style="justify-content: right;">Account</a>
+    {{/if}}
 
     </div>
   </nav>
