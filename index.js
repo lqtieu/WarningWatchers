@@ -73,6 +73,10 @@ app.get("/movies", (req, res) => {
     res.render('movies');
 });
 
+app.get("/requests", (req, res) => {
+    res.render('requests');
+});
+
 app.get("/register", (req, res) => {
     if(req.user) {
         return res.redirect('/');
