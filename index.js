@@ -65,12 +65,20 @@ app.get("/about", (req, res) => {
     res.render('about');
 });
 
+app.get("/categories", (req, res) => {
+    res.render('categories');
+});
+
 app.get("/team-bio", (req, res) => {
     res.render('team-bio');
 });
 
 app.get("/movies", (req, res) => {
     res.render('movies');
+});
+
+app.get("/addmovie", (req, res) => {
+    res.render('addmovie');
 });
 
 app.get("/requests", (req, res) => {
