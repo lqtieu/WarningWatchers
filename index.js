@@ -65,6 +65,10 @@ app.get("/about", (req, res) => {
     res.render('about');
 });
 
+app.get("/categories", (req, res) => {
+    res.render('categories');
+});
+
 app.get("/team-bio", (req, res) => {
     res.render('team-bio');
 });
