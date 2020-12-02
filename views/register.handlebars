@@ -1,30 +1,39 @@
 {{!--  
-Author: Unique Ratliff
-Date: 11/26/2020
-Description: An interactive message board that allows for user
-    account functionality
+Author: Sammy Romero
+Date: 12/1/2020
+Description: Transitioning everything from html to handlebars
   --}}
-
-{{#if error}}
-<div style="background: red; color: white;">
-    {{error}}
-</div>
-{{/if}}
-
-<ul class="header-ul">
-    <li class="header-li"><a href="/">home</a></li>
-    <li class="header-li"><a href="/login">login</a></li>
-</ul class="header-ul">
-
-
-<div class="login-form">
-    <h1 class="text-center">Register</h1>
-    <form action="/register" method="POST" class="text-center">
-        <input type="text" placeholder="username" name="username" /><br><br>
-        <input type="email" placeholder="email" name="email" /><br><br>
-        <input type="password" placeholder="password" name="password" /><br><br>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block">register</button>
+<link rel="stylesheet" href="/static/register.css">
+<body>
+    <main class= "contentContainer" role= "main">
+        <div class= "index">
+                <!-- Registration Form from https://www.w3schools.com/howto/howto_css_register_form.asp -->
+                <form action="/register" method="POST">
+                    <div class="container">
+                      <br>
+                      <h1>Register</h1>
+                      <p><i>Please fill in this form to create an account.</i></p>
+                      <hr>
+                  
+                      <div for="email"><h4><b>Email</b></h4></label>
+                      <input type="text" placeholder="Enter Email" name="email" id="email" required>
+                  
+                      <label for="psw"><h4><b>Password</b></h4></label>
+                      <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+                  
+                      <label for="psw-repeat"><h4><b>Repeat Password</b></h4></label>
+                      <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
+                      <hr>
+                  
+                      <p><i>By creating an account you agree to our <a href="https://policies.google.com/privacy?hl=en-US">Terms & Privacy</i></a>.</p>
+                      <button type="submit" class="registerbtn">Register</button>
+                    </div>
+                  
+                    <div class="container signin">
+                      <p>Already have an account? <a href="index.html">Sign in</a>.</p>
+                    </div>
+                  </form>                 
+            </div>
         </div>
-    </form>
-</div>
+    </main>
+</body>
