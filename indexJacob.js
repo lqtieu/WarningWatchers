@@ -61,6 +61,26 @@ app.get('/listMovies', async (req, res) =>{
     res.render("listMovies", {movies, user: req.user});
 })
 
+//new code from Jacob
+app.get('/searchCategory', async (req, res) =>{
+    const searchCategory=req.query.category;
+    console.log("category", searchCategory);
+    const db = await dbPromise;
+    if(searchCategory){    
+        const movies = await db.all(
+            `SELECT
+                Movies.movieTitle,
+                Movies.movieLength,
+                Movies.movieYear,
+                Movies.movieRating
+            FROM Movies INNER JOIN Category ON Movies.id = Category.movieId WHERE Category.addCategory=?`, searchCategory 
+        );
+        console.log("movieNCategory", movies);
+        res.render('searchCategory', {movies});
+    }
+    else {return res.render('searchCategory')}
+})
+
 app.get('/search', async (req, res) =>{
     searchMovie=req.query.movieTitle
     console.log('search', searchMovie);
