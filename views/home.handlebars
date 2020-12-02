@@ -1,4 +1,10 @@
- <link rel="stylesheet" href="/static/style.css">
+{{#if error}}
+<div style="background: red; color: white;">
+    {{error}}
+</div>
+{{/if}}
+
+<link rel="stylesheet" href="/static/style.css">
 <body>
     <main class= "contentContainer" role= "main">
         <div class= "index">
@@ -24,10 +30,11 @@
               </div>
             </div>
 
+            {{#if user}}
             <!-- Request to Add Movie Card/Button -->
             <div class="container">
             <!-- DELETE LATER ! ! ! ! !  -->
-              <a class="btn btn-primary" href="account.html" role="button">(TEMPORARY) Access to Account Page</a>
+            <!-- <a class="btn btn-primary" href="account.html" role="button">(TEMPORARY) Access to Account Page</a> -->
               <br>
               <br>
               <div class="row" style="padding: 15px; display: flex; justify-content: center;">
@@ -65,8 +72,9 @@
                   </a>                
                 </div>
             </div>
-          </div>                
-
+          </div> 
+          
+          {{else}}
             <!-- Login Form from https://www.w3schools.com/howto/howto_css_login_form.asp -->
             <div class= "container" > 
               <form action="#" method="post">                  
@@ -88,6 +96,7 @@
               </form>
               <br><br>
           </div>
+          {{/if}}
       </div>
   </main>
 
