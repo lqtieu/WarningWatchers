@@ -1,47 +1,75 @@
- <link rel="stylesheet" href="/static/style.css">
-  <link rel="stylesheet" href="/static/team-bio.css">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/team-bio.css">
+
 <body>
-    <main class= "contentContainer" role= "main">
-        <div class= "index">
-          <!-- ==== Photo Header ==== -->
+  <div class="container" style="height: 100vh;"> <!-- Take out whitespace underneath footer -->
+    <main class="contentContainer" role="main">
+      <div class="index">
+        <div class="container">
+          <div class="container"></div> <!-- Space between header and search bar-->
 
-                <div class="container">
-                    <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">Movie #1</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">Mini Movie Description</h6>
-                          <p class="card-text">(Movie Warnings to hyperlinks to posts detailing category warnings)</p>
-                          <a href="#" class="card-link">IMBD Link</a>
-                          <a href="#" class="card-link">Report</a>
-                        </div>
-                      </div>
-                </div>
-
-                <div class="container">
-                    <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">Movie #2</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">Mini Movie Description</h6>
-                          <p class="card-text">(Movie Warnings to hyperlinks to posts detailing category warnings)</p>
-                          <a href="#" class="card-link">IMBD Link</a>
-                          <a href="#" class="card-link">Report</a>
-                        </div>
-                      </div>
-                </div>
-
-                <div class="container">
-                    <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">Movie #3</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">Mini Movie Description</h6>
-                          <p class="card-text">(Movie Warnings to hyperlinks to posts detailing category warnings)</p>
-                          <a href="#" class="card-link">IMBD Link</a>
-                          <a href="#" class="card-link">Report</a>
-                        </div>
-                      </div>
-                </div>
-
-            </div>
+          <!-- Search Bar for Movies -->
+          <label>
+            <h1>Movie Search </h1>
+          </label>
+          <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <input class="form-control form-control-sm ml-3 w-75" type="test" placeholder="Search for Movie Title"
+              aria-label="Search" style="padding-right: 5px;" name="movieTitle">
+            <button type="submit" style="width:min-content; height:min-content; padding: 5px; padding-left: 5px;">
+              Search</button>
+          </form>
         </div>
-    </main>
+
+        <!-- **CHECK IF WORKS: Shows Search results in template. I don't know how to make all results show before searching. (Lienna) -->
+        {{#if movies}}
+        <div class="container">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{movies.movieTitle}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">
+                <br>Movie Year: {{movies.movieYear}}
+                <br>Length: {{movies.movieLength}}
+                <br>Rating: {{movies.movieRating}}
+              </h6>
+              <p class="card-text">
+                {{#each category}}
+                <li> {{this.addCategory}} </li>
+                {{/each}}
+              </p>
+            </div>
+          </div>
+        </div>
+        {{/if}}
+
+        <!-- Skeleton Cards
+      <div class="container">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Movie #2</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Mini Movie Description</h6>
+            <p class="card-text">(Movie Warnings to hyperlinks to posts detailing category warnings)</p>
+            <a href="#" class="card-link">IMBD Link</a>
+            <a href="#" class="card-link">Report</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Movie #3</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Mini Movie Description</h6>
+            <p class="card-text">(Movie Warnings to hyperlinks to posts detailing category warnings)</p>
+            <a href="#" class="card-link">IMBD Link</a>
+            <a href="#" class="card-link">Report</a>
+          </div>
+        </div>
+      </div>
+      -->
+
+      </div>
+  </div>
+  </main>
+  </div>
 </body>

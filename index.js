@@ -49,7 +49,25 @@ app.use(async (req, res, next) => {
 
 //Invoked everytime someone hits webpage
 //Read messages from database
-app.get("/", async (req, res) => {
+
+app.get("/", async (req, res) =>{
+    console.log("something");
+    const db = await dbPromise;
+    const movies = await db.all(
+        `SELECT
+        id,
+        movieTitle,
+        movieLength,
+        movieYear,
+        movieRating
+        FROM Movies`
+    );
+    res.render("home", {movies, user: req.user});
+});
+
+
+// old .get("/") before jacob's file
+/*(app.get("/", async (req, res) => {
     const db = await dbPromise;
     //Select every message and matches them to a user record
     //then selects from the combine record the id, content, and username from each record
@@ -59,7 +77,7 @@ app.get("/", async (req, res) => {
         Users.username as authorName
     FROM Messages LEFT JOIN Users WHERE Messages.authorId = Users.id`);
     res.render("home", { messages: messages, user: req.user });
-});
+});*/
 
 app.get("/about", (req, res) => {
     res.render('about');
@@ -77,12 +95,27 @@ app.get("/movies", (req, res) => {
     res.render('movies');
 });
 
+app.get("/account", (req, res) => {
+    res.render('account');
+});
+
 app.get("/addmovie", (req, res) => {
     res.render('addmovie');
 });
 
-app.get("/requests", (req, res) => {
-    res.render('requests');
+app.get("/requests", async (req, res) => {
+    //res.render('requests');
+    const db = await dbPromise;
+    const movies = await db.get('SELECT movieTitle, movieLength, movieYear, movieRating FROM Movies WHERE movieTitle=?', searchMovie);
+    console.log("movie1", movieID)
+    const category = await db.all(
+        `SELECT
+            addCategory,
+            movieId
+        FROM Category WHERE movieId=?`, movieID.id
+    );
+    console.log('category', category);
+    res.render("requests", {category, movies});
 });
 
 app.get("/register", (req, res) => {
@@ -156,7 +189,7 @@ app.post("/login", async (req, res) => {
 });
 
 //Writes messages to database
-app.post("/message", async (req, res) => {
+/*app.post("/message", async (req, res) => {
     if (!req.user){
         res.status(401);
         return res.send('must be loggin in to post messages')
@@ -166,7 +199,20 @@ app.post("/message", async (req, res) => {
     req.body.message, req.user.id);
 
     res.redirect('/');
-});
+}); */
+
+app.post('/addCategory', async (req, res) =>{
+    if (!req.user) {return res.redirect('/')}
+    const db = await dbPromise;
+    movieID = await db.get('SELECT id FROM Movies WHERE MovieTitle=?', searchMovie);
+    console.log("movie ID", movieID)
+    try{
+        const test = await db.run('INSERT INTO Category (addCategory, movieId) VALUES (?, ?);', req.body.addCategory, movieID.id)
+        console.log("test", movieID);
+        console.log("test 2", test);
+        res.redirect('/addCategory');
+    } catch (e) {return res.render('addCategory', {error: e, user: req.user}); }
+})
 
 //Gets access to database and runs migration
 const setup = async () => {
