@@ -10,13 +10,14 @@ Description: An interactive message board that allows for user
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LogIn Form</title>
-     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>Warning Watchers</title>
 
     <link rel="stylesheet" href="../../static/style.css">
      <!-- Bootstrap CSS file -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+
+
 <!-- NavBar from Bootstrap https://getbootstrap.com/docs/4.1/components/navbar/ -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">Warning Watchers</a>
@@ -39,8 +40,12 @@ Description: An interactive message board that allows for user
         <li class="nav-item">
           <a class="nav-link" href="/movies">Movies</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="categories.html">Other Categories</a>
+        </li>
 
-        <li class="nav-item dropdown">
+        <!-- Dismiss this until we can get the SQL databases working and etc. -->
+        <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Categories
             </a>
@@ -51,7 +56,7 @@ Description: An interactive message board that allows for user
               <a class="dropdown-item" href="#">PDA Scenes</a>
               <a class="dropdown-item" href="categories.html">Other Categories</a>
             </div>
-          </li>
+          </li> -->
       </ul>
     </div>
 
@@ -61,6 +66,9 @@ Description: An interactive message board that allows for user
       <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
         aria-label="Search">
     </form> 
+
+    <!-- NavBar button that will lead user to Account details -->
+    <a class="nav-link" href="../account" style="justify-content: right;">Account</a>
 
     </div>
   </nav>
