@@ -23,24 +23,46 @@
 
         <!-- **CHECK IF WORKS: Shows Search results in template. I don't know how to make all results show before searching. (Lienna) -->
         {{#if movies}}
-        <div class="container">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">{{movies.movieTitle}}</h5>
-              <h6 class="card-subtitle mb-2 text-muted">
-                <br>Movie Year: {{movies.movieYear}}
-                <br>Length: {{movies.movieLength}}
-                <br>Rating: {{movies.movieRating}}
-              </h6>
-              <p class="card-text">
-                {{#each category}}
-                <li> {{this.addCategory}} </li>
-                {{/each}}
-              </p>
+          <div class="container">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{movies.movieTitle}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                  <br>Movie Year: {{movies.movieYear}}
+                  <br>Length: {{movies.movieLength}}
+                  <br>Rating: {{movies.movieRating}}
+                </h6>
+                <p class="card-text">
+                  {{#each category}}
+                  <li> {{this.addCategory}} </li>
+                  {{/each}}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
         {{/if}}
+
+        {{#each movies}}
+          <div class="container">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{this.movies.movieTitle}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                  <br>Movie Year: {{this.movies.movieYear}}
+                  <br>Length: {{this.movies.movieLength}}
+                  <br>Rating: {{this.movies.movieRating}}
+                </h6>
+                <p class="card-text">
+                  {{#each category}}
+                  <li> {{this.addCategory}} </li>
+                  {{/each}}
+                </p>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+
+
 
         <!-- Skeleton Cards
       <div class="container">

@@ -47,25 +47,6 @@ app.use(async (req, res, next) => {
     next();
 });
 
-//Invoked everytime someone hits webpage
-//Read messages from database
-
-app.get("/", async (req, res) =>{
-    console.log("something");
-    const db = await dbPromise;
-    const movies = await db.all(
-        `SELECT
-        id,
-        movieTitle,
-        movieLength,
-        movieYear,
-        movieRating
-        FROM Movies`
-    );
-    res.render("home", {movies, user: req.user});
-});
-
-
 // old .get("/") before jacob's file
 /*(app.get("/", async (req, res) => {
     const db = await dbPromise;
@@ -78,6 +59,11 @@ app.get("/", async (req, res) =>{
     FROM Messages LEFT JOIN Users WHERE Messages.authorId = Users.id`);
     res.render("home", { messages: messages, user: req.user });
 });*/
+
+//Invoked everytime someone hits webpage
+app.get("/", async (req, res) =>{
+    res.render('home');
+});
 
 app.get("/about", (req, res) => {
     res.render('about');
@@ -99,8 +85,20 @@ app.get("/account", (req, res) => {
     res.render('account');
 });
 
-app.get("/addmovie", (req, res) => {
-    res.render('addmovie');
+//Read messages from database
+app.get("/addmovie", async (req, res) => {
+    console.log("Retrieved Movie");
+    const db = await dbPromise;
+    const movies = await db.all(
+        `SELECT
+        id,
+        movieTitle,
+        movieLength,
+        movieYear,
+        movieRating
+        FROM Movies`
+    );
+    res.render("home", {movies, user: req.user});
 });
 
 app.get("/requests", async (req, res) => {
