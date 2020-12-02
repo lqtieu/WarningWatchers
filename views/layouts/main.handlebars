@@ -70,9 +70,9 @@ Description: An interactive message board that allows for user
 
     <!-- NavBar button that will lead user to Account details -->
     <a class="nav-link" href="../account" style="justify-content: right;">Account</a>
-    {{#unless req.user}}
+    {{#if user}}
     <a class="nav-link" href="../logout" style="justify-content: right;">Logout</a>
-    {{/unless}}
+    {{/if}}
     </div>
   </nav>
 </head>
