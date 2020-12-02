@@ -139,7 +139,7 @@ app.get("/login", (req, res) => {
     if(req.user) {
         return res.redirect('/');
     }
-    res.render('login');
+    res.render('home');
 });
 
 app.get('/logout', (req, res) =>{
@@ -177,7 +177,7 @@ app.post('/register', async (req, res) =>{
         }
         catch (e) { return res.render('register', {error: e}, console.log(e)); }//if something goes wrong during registration, error is passed.
     }
-    else {res.render('register', {error: 'password do not match'})}
+    else {res.render('register', {error: 'ERROR: Passwords did not match, please try again.'})}
 })
 
 app.post('/login', async (req, res) =>{
@@ -190,16 +190,16 @@ app.post('/login', async (req, res) =>{
     try{
         //checks users email if in the database
         const existingUser = await db.get('SELECT * FROM Users WHERE email=?', email);
-        if(!existingUser) { throw 'incorrect login'; }
+        if(!existingUser) { throw 'Incorrect Login Credentials: Please try again.'; }
         //checks users password by decrpting hash from database
         const passwordMatch = await bcrypt.compare(password, existingUser.password);
-        if(!passwordMatch) { throw 'incorrect login'; }
+        if(!passwordMatch) { throw 'Incorrect Login Credentials: Please try again.'; }
 
         //if user has correct email and password it is grant access through grantAccess function in auth.js
         const token = await grantAuthToken(existingUser.id);
         res.cookie('userToken', token);
         res.redirect('/');
-    } catch (e) { return res.render('login', { error: e }); }
+    } catch (e) { return res.render('home', { error: e }); }
 })
 
 /*app.post("/login", async (req, res) => {
