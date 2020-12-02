@@ -7,6 +7,14 @@ Description: Transitioning everything from html to handlebars
 <body>
     <main class= "contentContainer" role= "main">
         <div class= "index">
+            <div class= "container" > 
+                {{#if error}}
+                <div class="alert alert-danger center-block" style="width: 80%; margin-left: 10%;" role="alert"> <i class="fa fa-exclamation-triangle" aria-hidden="true">                  
+                  {{error}}
+                  </div>
+                {{/if}}
+            </div>
+
                 <!-- Registration Form from https://www.w3schools.com/howto/howto_css_register_form.asp -->
                 <form action="/register" method="POST">
                     <div class="container">
