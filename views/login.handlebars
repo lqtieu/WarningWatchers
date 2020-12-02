@@ -1,0 +1,35 @@
+{{!--  
+Author: Unique Ratliff
+Date: 11/26/2020
+Description: An interactive message board that allows for user
+    account functionality
+  --}}
+
+{{#if error}}
+<div style="background: red; color: white;">
+    {{error}}
+</div>
+{{/if}}
+
+
+<ul class="header-ul">
+    <li class="header-li"><a href="/">home</a></li>
+    {{#unless user}}
+    <li class="header-li"><a href="/register">register</a></li>
+    {{/unless}}
+</ul class="header-ul">
+
+<div class="login-form">
+    <form action="/login" method="POST">
+        <h2 class="text-center">Log in</h2>
+        <div class="form-group">
+            <input type="email" placeholder="email" name="email" />
+        </div>
+        <div class="form-group">
+            <input type="password" placeholder="password" name="password" />
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Log in</button>
+        </div>
+    </form>
+</div>
