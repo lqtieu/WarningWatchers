@@ -3,14 +3,13 @@
 <body>
     <main class="contentContainer" role="main">
         <h1 class="text-center">Thank you for adding a movie!</h1>
-        {{log  movies}}
         <div class="container">
             <div class="card">
                 <div class="card-body">
-                    <h2><b>Title: </b> {{this.movies.movieTitle}}<br></h2>
-                    <h2><b>Year: </b> {{this.movies.movieYear}}<br></h2>
-                    <b>Length: </b> {{this.movies.movieLength}}<br>
-                    <b>Rating: </b> {{this.movies.movieRating}}<br>
+                    <h2><b>Title: </b> {{movies.movieTitle}}<br></h2>
+                    <h2><b>Year: </b> {{movies.movieYear}}<br></h2>
+                    <b>Length: </b> {{movies.movieLength}}<br>
+                    <b>Rating: </b> {{movies.movieRating}}<br>
                 </div>
             </div>
         </div>
