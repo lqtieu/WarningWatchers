@@ -1,3 +1,8 @@
+ {{#if error}}
+<div style="background: red; color: white;">
+    {{error}}
+</div>
+{{/if}}
  <link rel="stylesheet" href="/static/about.css">
 <body>
     <main class= "contentContainer" role= "main">
@@ -9,7 +14,7 @@
                       <hr>
 
                       <!-- ***** we will need to refine this later once the database for movie categories are up and running some variable names are incorrect -->
-                      <form action="/movies" method="POST">
+                      <form action="/addmovie" method="POST">
                         <div class="form-group row" style="text-align: left;">
                           <label class="col-sm-2 col-form-label">Movie Title</label>
                           <div class="col-sm-10">
@@ -35,7 +40,7 @@
                           </div>
                         </div>
                        
-                        <button type="submit" class="button" style="align-content: center;">Submit</button>
+                        <button type="submit" href="../addmovie" class="button" style="align-content: center;">Submit</button>
 
                       </form>
                     </div>

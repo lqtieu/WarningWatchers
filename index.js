@@ -99,18 +99,18 @@ app.get("/account", (req, res) => {
 
 //Read messages from database
 app.get("/addmovie", async (req, res) => {
-    console.log("Retrieved Movie");
-    const db = await dbPromise;
-    const movies = await db.all(
-        `SELECT
-        id,
-        movieTitle,
-        movieLength,
-        movieYear,
-        movieRating
-        FROM Movies`
-    );
-    res.render("addmovie", {movies, user: req.user});
+    // const db = await dbPromise;
+    // const movies = await db.all(
+    //     `SELECT
+    //     id,
+    //     movieTitle,
+    //     movieLength,
+    //     movieYear,
+    //     movieRating
+    //     FROM Movies`
+    // );
+    // res.render("addmovie", {movies, user: req.user});
+    res.render("addmovie");
 });
 
 app.get("/requests", async (req, res) => {
@@ -200,6 +200,19 @@ app.post('/login', async (req, res) =>{
         res.cookie('userToken', token);
         res.redirect('/');
     } catch (e) { return res.render('login', { error: e }); }
+})
+
+//allows user to post movies if they are logged in.
+app.post('/addmovie', async (req, res) =>{
+    console.log("in add movie");
+    const db = await dbPromise;
+    try{
+        console.log("in add movie 2");
+        //insert movies into the movies table in database.
+        await db.run('INSERT INTO Movies (movieTitle, movieLength, movieYear, movieRating) VALUES (?, ?, ?, ?);', req.body.movieTitle, req.body.movieLength, req.body.movieYear, req.body.movieRating);
+        res.redirect('/movieAdded');
+    }
+    catch (e) {return res.render('/addmovie', {error: e, user: req.user}); }
 })
 
 /*app.post("/login", async (req, res) => {
