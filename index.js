@@ -69,6 +69,10 @@ app.get("/team-bio", (req, res) => {
     res.render('team-bio');
 });
 
+app.get("/movies", (req, res) => {
+    res.render('movies');
+});
+
 app.get("/register", (req, res) => {
     if(req.user) {
         return res.redirect('/');
