@@ -110,7 +110,7 @@ app.get("/addmovie", async (req, res) => {
         movieRating
         FROM Movies`
     );
-    res.render("home", {movies, user: req.user});
+    res.render("addmovie", {movies, user: req.user});
 });
 
 app.get("/requests", async (req, res) => {
