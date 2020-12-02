@@ -1,0 +1,32 @@
+{{#if error}}
+<div style="background: red; color: white;">
+    {{error}}
+</div>
+{{/if}}
+<h1>Movies</h1>
+
+{{#if movies}}
+<ul>
+    <li>{{movies.movieTitle}} length {{movies.movieLength}}mins, {{movies.movieYear}} Rating {{movies.movieRating}}</li>
+    {{#each category}}
+    <li>    {{this.addCategory}}</li>
+    {{/each}}
+</ul>
+{{#if user}}
+<form><a href="/addCategory"> add a Category </a></form>
+{{/if}}
+{{/if}}
+
+{{#if user}}
+<a href='/'>home </a><a href='/logout'> logout </a><a href="/listMovies"> List of Movies </a>
+<form action="/search" method="GET">
+    <input type="test" placeholder="Movie Title" name="movieTitle" />
+    <button type="submit">find</button>
+</form>
+{{else}}
+<a href='/'>home </a><a href='/register'> register </a><a href="/login"> login </a>
+<form action="/search" method="GET">
+    <input type="test" placeholder="Movie Title" name="movieTitle" />
+    <button type="submit">find</button>
+</form>
+{{/if}}

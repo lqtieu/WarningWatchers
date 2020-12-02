@@ -1,0 +1,18 @@
+{{#if error}}
+<div style="background: red; color: white;">
+    {{error}}
+</div>
+{{/if}}
+
+<ul>
+    <li>{{movies.movieTitle}} length {{movies.movieLength}}mins, {{movies.movieYear}} Rating {{movies.movieRating}}</li>
+    {{#each category}}
+    <li>    {{this.addCategory}}</li>
+    {{/each}}
+</ul>
+
+<a href="/">home </a><a href="/logout"> logout </a>
+<form action="/addCategory" method="POST">
+    <input type="test" placeholder="Add Category" name="addCategory" />
+    <button type="submit">send</button>
+</form>
