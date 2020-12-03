@@ -134,7 +134,11 @@ app.get("/logout", (req, res) => {
 
 // ==== ABOUT PAGE ====
 app.get("/about", (req, res) => {
-    res.render("about");
+    res.render("about",  { user: req.user });
+});
+
+app.post("/about", (req, res) => {
+    res.redirect("about",  { user: req.user });
 });
 
 // ==== TEAM BIO PAGE ====
