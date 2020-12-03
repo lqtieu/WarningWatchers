@@ -21,78 +21,27 @@
             <button type="submit" style="width:min-content; height:min-content; padding: 5px; padding-left: 5px;">
               Search</button>
           </form>
-        </div>
-
-        <!-- **CHECK IF WORKS: Shows Search results in template. I don't know how to make all results show before searching. (Lienna) -->
-        <!-- {{#if movies}}
-          <div class="container">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">{{movies.movieTitle}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                  <br>Movie Year: {{movies.movieYear}}
-                  <br>Length: {{movies.movieLength}}
-                  <br>Rating: {{movies.movieRating}}
-                </h6>
-                <p class="card-text">
-                  {{#each category}}
-                  <li> {{this.addCategory}} </li>
-                  {{/each}}
-                </p>
+          {{#each movies}}
+            <div class="container">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">{{this.movies.movieTitle}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">
+                    <br>Movie Year: {{this.movies.movieYear}}
+                    <br>Length: {{this.movies.movieLength}}
+                    <br>Rating: {{this.movies.movieRating}}
+                  </h6>
+                  <p class="card-text">
+                    {{#each category}}
+                    <li> {{this.addCategory}} </li>
+                    {{/each}}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        {{/if}}
-        -->
+          {{/each}}
 
-        {{#each movies}}
-          <div class="container">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">{{this.movies.movieTitle}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                  <br>Movie Year: {{this.movies.movieYear}}
-                  <br>Length: {{this.movies.movieLength}}
-                  <br>Rating: {{this.movies.movieRating}}
-                </h6>
-                <p class="card-text">
-                  {{#each category}}
-                  <li> {{this.addCategory}} </li>
-                  {{/each}}
-                </p>
-              </div>
-            </div>
-          </div>
-        {{/each}}
-
-
-
-        <!-- Skeleton Cards
-      <div class="container">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Movie #2</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Mini Movie Description</h6>
-            <p class="card-text">(Movie Warnings to hyperlinks to posts detailing category warnings)</p>
-            <a href="#" class="card-link">IMBD Link</a>
-            <a href="#" class="card-link">Report</a>
-          </div>
         </div>
-      </div>
-
-      <div class="container">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Movie #3</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Mini Movie Description</h6>
-            <p class="card-text">(Movie Warnings to hyperlinks to posts detailing category warnings)</p>
-            <a href="#" class="card-link">IMBD Link</a>
-            <a href="#" class="card-link">Report</a>
-          </div>
-        </div>
-      </div>
-      -->
-
       </div>
   </div>
   </main>
