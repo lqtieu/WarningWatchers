@@ -103,7 +103,7 @@ app.get('/search', async (req, res) =>{
 })
 
 //retrieves movies from the database.
-app.get("/", async (req, res) =>{
+app.get("/movies", async (req, res) =>{
     console.log("somthing");
     const db = await dbPromise;
     const movies = await db.all(
@@ -115,7 +115,7 @@ app.get("/", async (req, res) =>{
         movieRating
         FROM Movies`
     );
-    res.render("home", {movies, user: req.user});
+    res.render("movies", {movies, user: req.user});
 });
 
 app.get('/addCategory', async (req, res) =>{

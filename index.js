@@ -89,9 +89,9 @@ app.get("/team-bio", (req, res) => {
     res.render('team-bio');
 });
 
-app.get("/movies", (req, res) => {
+/*app.get("/movies", (req, res) => {
     res.render('movies');
-});
+});*/
 
 app.get("/account", (req, res) => {
     res.render('account');
@@ -152,6 +152,35 @@ app.get("/login", (req, res) => {
 app.get('/logout', (req, res) =>{
     res.clearCookie('userToken');
     res.redirect('/');
+})
+
+app.get("/movies", async (req, res) =>{
+    console.log("somthing");
+    const db = await dbPromise;
+    const movies = await db.all(
+        `SELECT
+        id,
+        movieTitle,
+        movieLength,
+        movieYear,
+        movieRating
+        FROM Movies`
+    );
+    res.render("movies", {movies});
+});
+
+app.get('/searchMovie', async (req, res) =>{
+    console.log("movie input", searchMovie)
+    const db = await dbPromise;
+    const movies = await db.get(`
+    SELECT 
+        movieTitle,
+        movieYear,
+        movieLength,
+        movieRating
+    FROM Movies WHERE id=?`, searchMovie.id);
+    console.log("movie is", movies)
+    res.render('searchMovie', {movies})
 })
 
 app.post('/register', async (req, res) =>{
@@ -271,6 +300,17 @@ app.post('/addCategory', async (req, res) =>{
         console.log("test 2", test);
         res.redirect('/addCategory');
     } catch (e) {return res.render('addCategory', {error: e, user: req.user}); }
+})
+
+app.post('/movies', async (req, res) =>{
+    const db = await dbPromise;
+    try{
+        searchMovie = await db.get(`SELECT
+            id
+        FROM Movies WHERE movieTitle=?`, req.body.movieTitle);
+        console.log("movie checked", searchMovie);
+        res.redirect('/searchMovie');
+    } catch (e) {return res.render('movies', {error: e});}
 })
 
 //Gets access to database and runs migration
