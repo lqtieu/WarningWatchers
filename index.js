@@ -220,7 +220,7 @@ app.post('/addmovie', async (req, res) =>{
         searchMovie = await db.get('SELECT id FROM Movies WHERE movieTitle=?', req.body.movieTitle);
         res.redirect('movieAdded');
     }
-    catch (e) {return res.render('addmovie', {error: e, user: req.user}); }
+    catch (e) {return res.render('addmovie', {error: "Movie already in database. Please try another movie.", user: req.user}); }
 })
 
 /*app.post("/login", async (req, res) => {

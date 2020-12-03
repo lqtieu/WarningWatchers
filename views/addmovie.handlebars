@@ -10,6 +10,12 @@
                       <h1 style="color: black;">Suggest a Movie</h1>
                       <hr>
 
+                      {{#if error}}
+                      <div class="alert alert-danger center-block" style="width: 80%; margin-left: 10%;" role="alert"> <i class="fa fa-exclamation-triangle" aria-hidden="true">                  
+                        {{error}}
+                        </div>
+                      {{/if}}
+
                       <!-- ***** we will need to refine this later once the database for movie categories are up and running some variable names are incorrect -->
                       <form action="/addmovie" method="POST">
                         <div class="form-group row" style="text-align: left;">
