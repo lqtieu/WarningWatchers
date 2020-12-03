@@ -1,2 +1,10 @@
 @import url('style.css');
 @import url('register.css');
+
+.card {
+    background-color: white;
+}
+
+h5 {
+    color: black;
+}

@@ -2,35 +2,51 @@
 Page to add categories to the database
   --}}
 <link rel="stylesheet" href="/static/addCate.css">
+
 <body>
-    <main class= "contentContainer" role= "main">
-        <div class= "index">
-              <form action="/addCate" method="GET">
-                <div class="container">
-                  <br>
-                  <h1 style="color: black;">Suggest a Category</h1>
-                  <hr>
-              
-                  <!-- ***** we will need to refine this later once the database for movie categories are up and running some variable names are incorrect -->
-                  <label for="cate-name"><h4><b>Give your category a name.</b></h4></label>
-                  <input type="text" style="background-color: white;" placeholder="Enter movie Title" name="movieTitle" />
-                  {{#if movies}}
-                  <ul>
-                      <li>{{movies.movieTitle}} length {{movies.movieLength}}mins, {{movies.movieYear}} Rating {{movies.movieRating}}</li>
-                      {{#each category}}
-                      <li>    {{this.addCategory}}</li>
-                      {{/each}}
-                      <a href="/addCategory">add a category</a>
-                  </ul>
-                  {{/if}}
+  <main class="contentContainer" role="main">
+    <div class="index">
+      <form action="/addCate" method="GET">
+        <div class="container" style="height: 100vh;">
+          <br>
+          <h1 style="color: black;">Suggest a Category</h1>
+          <hr>
 
-                  <button type="submit" class="registerbtn">Submit</button>
+          <!-- ***** we will need to refine this later once the database for movie categories are up and running some variable names are incorrect -->
+          <label for="cate-name">
+            <h4><b>Enter the movie you'd like to add the category to.</b></h4>
+          </label>
+          <input type="text" style="background-color: white;" placeholder="Enter movie Title" name="movieTitle" />
+          {{#if movies}}
+          <ul>
+            <div class="container" style="margin-bottom: auto;">
+              <div class="card" style="display:block;">
+                <div class="card-body">
+                  <h5 class="card-title">{{movies.movieTitle}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">
+                    Movie Year: {{movies.movieYear}} | Length: {{movies.movieLength}} | Rating: {{movies.movieRating}}
+                  </h6>
+                  <p class="card-text">
+                    {{#each category}}
+                    <li> {{this.addCategory}} </li>
+                    {{/each}}
+                  </p>
                 </div>
-
-                </div>
-              
-              </form>                    
+              </div>
             </div>
+            <!-- ADD A BUTTON TO ADD A CATEGORY aka addCategory.hbs->
+            <button type="submit" href="/addCategory" style="display: inline-block;">Add a Category</button>
+            {{!-- <a href="/addCategory">add a category</a> --}}
+          </ul>
+          {{/if}}
+
+          <button type="submit" class="registerbtn">Submit</button>
         </div>
-    </main>
+
+    </div>
+
+    </form>
+    </div>
+    </div>
+  </main>
 </body>

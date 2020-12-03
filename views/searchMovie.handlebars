@@ -22,14 +22,12 @@
               Search</button>
         </div>
 
-          <div class="container">
-            <div class="card">
+          <div class="container" style="margin-bottom: auto;">
+            <div class="card" style="display:block;">
               <div class="card-body">
                 <h5 class="card-title">{{movies.movieTitle}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">
-                  <br>Movie Year: {{movies.movieYear}}
-                  <br>Length: {{movies.movieLength}}
-                  <br>Rating: {{movies.movieRating}}
+                    Movie Year: {{movies.movieYear}} | Length: {{movies.movieLength}} | Rating: {{movies.movieRating}}
                 </h6>
                 <p class="card-text">
                   {{#each category}}
