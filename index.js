@@ -126,18 +126,19 @@ app.get("/movieAdded", async (req, res) =>{
 })
 
 app.get("/addCate", async (req, res) => {
-    //res.render('requests');
-    const db = await dbPromise;
-    const movies = await db.get('SELECT movieTitle, movieLength, movieYear, movieRating FROM Movies WHERE movieTitle=?', searchMovie);
-    console.log("movie1", movieID)
-    const category = await db.all(
-        `SELECT
-            addCategory,
-            movieId
-        FROM Category WHERE movieId=?`, movieID.id
-    );
-    console.log('category', category);
-    res.render("addCate", {category, movies});
+    res.render("addCate", {user: req.user});
+    // //res.render('addCate');
+    // const db = await dbPromise;
+    // const movies = await db.get('SELECT movieTitle, movieLength, movieYear, movieRating FROM Movies WHERE movieTitle=?', searchMovie);
+    // console.log("movie1", movieID)
+    // const category = await db.all(
+    //     `SELECT
+    //         addCategory,
+    //         movieId
+    //     FROM Category WHERE movieId=?`
+    // );
+    // console.log('category', category);
+    // res.render("addCate", {category, movies});
 });
 
 app.get("/register", (req, res) => {
@@ -294,7 +295,7 @@ app.post('/addmovie', async (req, res) =>{
     res.redirect('/');
 }); */
 
-app.post('/addCategory', async (req, res) =>{
+app.post('/addCate', async (req, res) =>{
     if (!req.user) {return res.redirect('/')}
     const db = await dbPromise;
     movieID = await db.get('SELECT id FROM Movies WHERE MovieTitle=?', searchMovie);
@@ -303,8 +304,8 @@ app.post('/addCategory', async (req, res) =>{
         const test = await db.run('INSERT INTO Category (addCategory, movieId) VALUES (?, ?);', req.body.addCategory, movieID.id)
         console.log("test", movieID);
         console.log("test 2", test);
-        res.redirect('/addCategory');
-    } catch (e) {return res.render('addCategory', {error: e, user: req.user}); }
+        res.redirect('/addCate');
+    } catch (e) {return res.render('addCate', {error: e, user: req.user}); }
 })
 
 app.post('/movies', async (req, res) =>{
