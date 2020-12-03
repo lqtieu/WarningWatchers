@@ -1,6 +1,7 @@
-body {
+html, body {
     background-color: #e6ebe0;
     color: #5ca4a9;
+    height: 100%;
   }
   
   a {

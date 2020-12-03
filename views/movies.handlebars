@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="/static/team-bio.css">
 
 <body>
-  <div class="container" style="height: 100vh;"> <!-- Take out whitespace underneath footer -->
     <main class="contentContainer" role="main">
       <div class="index">
         <div class="container">
@@ -22,9 +21,9 @@
               Search</button>
           
           {{#each movies}}
-            <div class="container">
-              <div class="card">
-                <div class="card-body">
+            <div class="container" style="margin-bottom: auto;">
+              <div class="card" style="display:block;">
+                <div class="card-body"">
                   <h5 class="card-title">{{this.movieTitle}}</h5>
                   <h6 class="card-subtitle mb-2 text-muted">
                     <br>Movie Year: {{this.movieYear}}
@@ -45,5 +44,4 @@
       </div>
   </div>
   </main>
-  </div>
 </body>

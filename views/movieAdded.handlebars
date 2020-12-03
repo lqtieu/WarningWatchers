@@ -2,15 +2,15 @@
 <link rel="stylesheet" href="/static/style.css">
 
 <body>
-    <main class="contentContainer" role="main">
+    <main class="contentContainer" role="main" style="height: 100%; min-height: 100%">
         <br>
         <h1 class="text-center">Thank you for adding a movie!</h1>
         <br>
         <div class="container">
-            <div class="card">
-                <div class="card-body">
-                    <h2 style="margin-top: 0px;"><br>{{movies.movieTitle}}<br></h2>
-                    <h4><b>Year: </b> {{movies.movieYear}}<br></h4>
+            <div class="card" style="padding-bottom: 2.5%;">
+                <div class="card-body" style="align-items: center;">
+                    <h2><br>{{movies.movieTitle}}<br></h2>
+                    <b>Year: </b> {{movies.movieYear}}<br>
                     <b>Length: </b> {{movies.movieLength}}<br>
                     <b>Rating: </b> {{movies.movieRating}}<br>
                 </div>
