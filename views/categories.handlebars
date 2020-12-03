@@ -1,93 +1,51 @@
-{{!--  
-Page to DISPLAY categories to the user. 
-  --}}
+<!-- Display page for all movies but this time you can search for categories -->
+
+<link rel="stylesheet" href="/static/style.css">
 <link rel="stylesheet" href="/static/team-bio.css">
 
 <body>
-  <div class="container" style="height: 100vh;">
-    <!-- Take out whitespace underneath footer -->
+  <div class="container" style="height: 100vh;"> <!-- Take out whitespace underneath footer -->
     <main class="contentContainer" role="main">
       <div class="index">
         <div class="container">
           <div class="container"></div> <!-- Space between header and search bar-->
 
-          <!-- Search Bar for categories -->
+          <!-- Search Bar for Categories -->
           <label>
             <h1>Category Search </h1>
           </label>
-          <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+          <form action="/categories" method="POST"
+            class="form-inline d-flex justify-content-center md-form form-sm mt-0">
             <i class="fas fa-search" aria-hidden="true"></i>
-            <input class="form-control form-control-sm ml-3 w-75" type="test" placeholder="Search for Category Title"
-              aria-label="Search" style="padding-right: 5px;" name="movieTitle">
+            <input class="form-control form-control-sm ml-3 w-75" type="test" placeholder="Search for a category"
+              aria-label="Search" style="padding-right: 5px;" name="addCategory">
             <button type="submit" style="width:min-content; height:min-content; padding: 5px; padding-left: 5px;">
               Search</button>
 
-              {{#each categories}}
-            <div class="container">
-              <div class="card">
+            <!-- Display movies-->
+            {{#each movies}}
+            <div class="container" style="margin-bottom: auto;">
+              <div class="card" style="display:block;">
                 <div class="card-body">
-                  <h5 class="card-title">{{this.addCategory}}</h5>
-                  {{!-- <h6 class="card-subtitle mb-2 text-muted">
-                    <br>Movie Year: {{this.movieYear}}
-                    <br>Length: {{this.movieLength}}
-                    <br>Rating: {{this.movieRating}}
-                  </h6> --}}
-                  <p class="card-text">
-                    {{#each movies}}
-                    <li> {{this.movieTitle}} </li>
-                   <h6 class="card-subtitle mb-2 text-muted">
+                  <h5 class=" card-title">{{this.movieTitle}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">
                     <br>Movie Year: {{this.movieYear}}
                     <br>Length: {{this.movieLength}}
                     <br>Rating: {{this.movieRating}}
                   </h6>
+                  <p class="card-text">
+                    {{#each category}}
+                    <li> {{this.addCategory}} </li>
                     {{/each}}
                   </p>
                 </div>
               </div>
             </div>
-          {{/each}}
+            {{/each}}
           </form>
         </div>
-
-        <!-- Might have to add a separate container to display categories + search results here -->
-
       </div>
-  </div>
-
-  <!-- Skeleton 
-      <div class="style">
-
-        <div class="container">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Category #1</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Mini Category Description</h6>
-            </div>
-          </div>
-        </div>
-
-        <div class="container">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Category #2</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Mini Category Description</h6>
-            </div>
-          </div>
-        </div>
-
-        <div class="container">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Category #3</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Mini Category Description</h6>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      -->
   </div>
   </main>
   </div>
-
 </body>
