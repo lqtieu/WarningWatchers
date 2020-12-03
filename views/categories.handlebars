@@ -11,7 +11,7 @@ Page to DISPLAY categories to the user.
         <div class="container">
           <div class="container"></div> <!-- Space between header and search bar-->
 
-          <!-- Search Bar for Movies -->
+          <!-- Search Bar for categories -->
           <label>
             <h1>Category Search </h1>
           </label>
@@ -21,10 +21,35 @@ Page to DISPLAY categories to the user.
               aria-label="Search" style="padding-right: 5px;" name="movieTitle">
             <button type="submit" style="width:min-content; height:min-content; padding: 5px; padding-left: 5px;">
               Search</button>
+
+              {{#each categories}}
+            <div class="container">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">{{this.addCategory}}</h5>
+                  {{!-- <h6 class="card-subtitle mb-2 text-muted">
+                    <br>Movie Year: {{this.movieYear}}
+                    <br>Length: {{this.movieLength}}
+                    <br>Rating: {{this.movieRating}}
+                  </h6> --}}
+                  <p class="card-text">
+                    {{#each movies}}
+                    <li> {{this.movieTitle}} </li>
+                   <h6 class="card-subtitle mb-2 text-muted">
+                    <br>Movie Year: {{this.movieYear}}
+                    <br>Length: {{this.movieLength}}
+                    <br>Rating: {{this.movieRating}}
+                  </h6>
+                    {{/each}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          {{/each}}
           </form>
         </div>
 
-        <!-- Might have to add a separate container to display movies + search results here -->
+        <!-- Might have to add a separate container to display categories + search results here -->
 
       </div>
   </div>
