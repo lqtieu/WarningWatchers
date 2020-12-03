@@ -1,3 +1,4 @@
+//index.js code for all web actions for .hbs
 import express from "express";
 import exphbs from "express-handlebars";
 import bcrypt, { compare } from "bcrypt";
@@ -351,7 +352,7 @@ app.get("/addCategory", async (req, res) => {
         FROM Category WHERE movieId=?`,
     movieID
   );
-  console.log("category", category);
+  //console.log("category", category);
   res.render("addCategory", { category, movies });
 });
 app.post("/addCategory", async (req, res) => {
@@ -371,7 +372,7 @@ app.post("/addCategory", async (req, res) => {
     console.log("test 2", test);
     res.redirect("/addCategory");
   } catch (e) {
-    return res.render("addCategory", { error: e, user: req.user });
+    return res.render("addCategory", { error: "Category is already in database.", user: req.user });
   }
 });
 
