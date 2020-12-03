@@ -250,7 +250,7 @@ app.get("/movieAdded", async (req, res) => {
             "SELECT movieTitle, movieLength, movieYear, movieRating FROM Movies WHERE id=?",
             searchMovie.id
         );
-        console.log("moive id added", movies);
+        //console.log("moive id added", movies);
         res.render("movieAdded", { movies });
     } else {
         res.render("movieAdded");
@@ -313,7 +313,7 @@ app.get("/movieAdded", async (req, res) => {
                 movieId
             FROM Category WHERE movieId=?`, movieID
         );
-        res.render("addCate", {movies, category, user: req.user});
+        res.render("addCategory", {movies, category, user: req.user});
     } else {
     res.render("addCate", { movies, user: req.user });}
     });
@@ -336,12 +336,12 @@ app.get("/movieAdded", async (req, res) => {
             "SELECT addCategory FROM Category WHERE addCategory=?",
             req.body.cate-name
         );
-        res.redirect("/addCate");
+        res.redirect("cateAdded");
     } catch (e) {
         return res.render("addmovie", {
             error: "Category is already in database.",
             user: req.user,
-        });x
+        });
     }
 });
 
@@ -357,7 +357,7 @@ app.post('/addCategory', async (req, res) =>{
         res.redirect('/addCategory');
     } catch (e) {return res.render('addCategory', {error: e, user: req.user}); }
 })
-// --- movieAdded.handlebars actions ---
+// --- cateAdded.handlebars actions ---
 app.get("/cateAdded", async (req, res) => {
     //console.log("Added a movie!")
     const db = await dbPromise;
