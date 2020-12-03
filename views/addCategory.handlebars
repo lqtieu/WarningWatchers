@@ -1,5 +1,5 @@
 {{!--  
-Page to add categories to the database, but the SECOND PAGE after hitting submit on addCate's page
+Page to add categories to the database, but the SECOND PAGE after hitting submit on addCate's page (ENTER A CATEGORY)
   --}}
 <link rel="stylesheet" href="/static/addCate.css">
 <body>
@@ -10,20 +10,39 @@ Page to add categories to the database, but the SECOND PAGE after hitting submit
                   <br>
                   <h1 style="color: black;">Suggest a Category</h1>
                   <hr>
+                  
+                  {{#if error}}
+                    <div class="alert alert-danger center-block" style="width: 80%; margin-left: 10%;" role="alert"> <i
+                        class="fa fa-exclamation-triangle" aria-hidden="true">
+                        {{error}}
+                    </div>
+                  {{/if}}
+
               
                   <!-- ***** we will need to refine this later once the database for movie categories are up and running some variable names are incorrect -->
                   <label for="cate-name"><h4><b>Give your category a name.</b></h4></label>
                   <input type="text" style="background-color: white;" placeholder="Enter a Category Name" name="addCategory" />
-                  {{#if movies}}
-                  <ul>
-                      <li>{{movies.movieTitle}} length {{movies.movieLength}}mins, {{movies.movieYear}} Rating {{movies.movieRating}}</li>
-                      {{#each category}}
-                      <li>    {{this.addCategory}}</li>
-                      {{/each}}
-                  </ul>
-                  {{/if}}
+          {{#if movies}}
+          <ul style="padding: 0;">
+            <div class="container" style="margin-bottom: auto;">
+              <div class="card" style="display:block;">
+                <div class="card-body">
+                  <h5 class="card-title">{{movies.movieTitle}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">
+                    Movie Year: {{movies.movieYear}} | Length: {{movies.movieLength}} | Rating: {{movies.movieRating}}
+                  </h6>
+                  <div class="card-body" style="color: black; text-align:center;">
+                    {{#each category}}
+                      {{this.addCategory}}<br>
+                    {{/each}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ul>
+          {{/if}}
 
-                  <button type="submit" class="registerbtn">Finish</button>
+                  <a type="submit" class="registerbtn" href="/cateAdded">Add category</a>
                 </div>
 
                 </div>

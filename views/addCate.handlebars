@@ -1,5 +1,5 @@
 {{!--  
-Page to add categories to the database
+Page to add categories to the database (ENTER MOVIE PAGE)
   --}}
 <link rel="stylesheet" href="/static/addCate.css">
 
@@ -12,11 +12,18 @@ Page to add categories to the database
           <h1 style="color: black;">Suggest a Category</h1>
           <hr>
 
+          {{#if error}}
+            <div class="alert alert-danger center-block" style="width: 80%; margin-left: 10%;" role="alert"> <i
+                class="fa fa-exclamation-triangle" aria-hidden="true">
+                {{error}}
+            </div>
+          {{/if}}
+
           <!-- ***** we will need to refine this later once the database for movie categories are up and running some variable names are incorrect -->
           <label for="cate-name">
             <h4><b>Enter the movie you'd like to add the category to.</b></h4>
           </label>
-          <input type="text" style="background-color: white;" placeholder="Enter movie Title" name="movieTitle" />
+          <input type="text" style="background-color: white;" placeholder="Enter a movie title" name="movieTitle" />
           {{#if movies}}
           <ul>
             <div class="container" style="margin-bottom: auto;">
@@ -26,17 +33,17 @@ Page to add categories to the database
                   <h6 class="card-subtitle mb-2 text-muted">
                     Movie Year: {{movies.movieYear}} | Length: {{movies.movieLength}} | Rating: {{movies.movieRating}}
                   </h6>
-                  <p class="card-text">
+                  <div class="card-body" style="color: black; text-align:center;">
                     {{#each category}}
-                    <li> {{this.addCategory}} </li>
+                      {{this.addCategory}}<br>
                     {{/each}}
-                  </p>
+                  </div>
                 </div>
               </div>
             </div>
-            <!-- ADD A BUTTON TO ADD A CATEGORY aka addCategory.hbs->
-            <button type="submit" href="/addCategory" style="display: inline-block;">Add a Category</button>
-            {{!-- <a href="/addCategory">add a category</a> --}}
+            <!-- ADD A BUTTON TO ADD A CATEGORY aka addCategory.hbs -->
+            {{!-- <button type="submit" href="/addCategory" style="display: inline-block;">Add a Category</button> --}}
+            <a href="/addCategory">add a category</a>
           </ul>
           {{/if}}
 

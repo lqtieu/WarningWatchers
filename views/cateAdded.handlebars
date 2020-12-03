@@ -12,6 +12,11 @@
                     <h2><br>{{movies.movieTitle}}<br></h2>
                     Movie Year: {{movies.movieYear}} | Length: {{movies.movieLength}} | Rating: {{movies.movieRating}}
                 </div>
+                <div class="card-body" style="color: black; text-align:center;">
+                    {{#each category}}
+                      {{this.addCategory}}<br>
+                    {{/each}}
+                  </div>
             </div>
         </div>
 
