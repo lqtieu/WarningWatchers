@@ -166,7 +166,7 @@ app.post("/movies", async (req, res) => {
         searchMovie = await db.get(
             `SELECT
                     id
-                FROM Movies WHERE movieTitle=?`,
+                FROM Movies WHERE movieTitle LIKE ?`,
             req.body.movieTitle
         );
         console.log("movie checked", searchMovie);
@@ -180,19 +180,33 @@ app.post("/movies", async (req, res) => {
 app.get("/searchMovie", async (req, res) => {
     console.log("movie input", searchMovie);
     const db = await dbPromise;
+    if(searchMovie){
     const movies = await db.get(
-        `
-            SELECT 
+            `SELECT 
                 movieTitle,
                 movieYear,
                 movieLength,
                 movieRating
             FROM Movies WHERE id=?`,
-        searchMovie.id
+            searchMovie.id
     );
     console.log("movie is", movies);
-    res.render("searchMovie", { movies });
+    res.render("searchMovie", { movies });}
 });
+
+app.get('/addCategory', async (req, res) =>{
+    const db = await dbPromise;
+    const movies = await db.get('SELECT movieTitle, movieLength, movieYear, movieRating FROM Movies WHERE id=?', movieID);
+    console.log("movie1", movieID)
+    const category = await db.all(
+        `SELECT
+            addCategory,
+            movieId
+        FROM Category WHERE movieId=?`, movieID
+    );
+    console.log('category', category);
+    res.render("addCategory", {category, movies});
+})
 
     // --- addmovie.handlebars actions ---
     app.get("/addmovie", async (req, res) => {
@@ -249,8 +263,31 @@ app.get("/movieAdded", async (req, res) => {
     // --- addCate.handlebars actions ---
     app.get("/addCate", async (req, res) => {
         //console.log("Display addCate page")
-        res.render("addCate", { user: req.user });
+        console.log("movie input", req.query.movieTitle);
+        const db = await dbPromise;
+        const movies = await db.get(
+            `SELECT
+                id, 
+                movieTitle,
+                movieYear,
+                movieLength,
+                movieRating
+            FROM Movies WHERE movieTitle LIKE ?`,
+            req.query.movieTitle
+        );
+    if(movies){
+        movieID=movies.id;
+        const category = await db.all(
+            `SELECT
+                addCategory,
+                movieId
+            FROM Category WHERE movieId=?`, movieID
+        );
+        res.render("addCate", {movies, category, user: req.user});
+    } else {
+    res.render("addCate", { movies, user: req.user });}
     });
+
     app.post("/addCate", async (req, res) => {
     //console.log("Adding a category...")
     if (!req.user) {
@@ -274,9 +311,22 @@ app.get("/movieAdded", async (req, res) => {
         return res.render("addmovie", {
             error: "Category is already in database.",
             user: req.user,
-        });
+        });x
     }
 });
+
+app.post('/addCategory', async (req, res) =>{
+    if (!req.user) {return res.redirect('/')}
+    const db = await dbPromise;
+    //movieID = await db.get('SELECT id FROM Movies WHERE MovieTitle=?', searchMovie);
+    console.log("movie ID", movieID)
+    try{
+        const test = await db.run('INSERT INTO Category (addCategory, movieId) VALUES (?, ?);', req.body.addCategory, movieID)
+        console.log("test", movieID);
+        console.log("test 2", test);
+        res.redirect('/addCategory');
+    } catch (e) {return res.render('addCategory', {error: e, user: req.user}); }
+})
 
 //Gets access to database and runs migration
 const setup = async () => {

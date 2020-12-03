@@ -5,7 +5,7 @@ Page to add categories to the database
 <body>
     <main class= "contentContainer" role= "main">
         <div class= "index">
-              <form action="/addCate" method="GET">
+              <form action="/addCategory" method="POST">
                 <div class="container">
                   <br>
                   <h1 style="color: black;">Suggest a Category</h1>
@@ -13,14 +13,13 @@ Page to add categories to the database
               
                   <!-- ***** we will need to refine this later once the database for movie categories are up and running some variable names are incorrect -->
                   <label for="cate-name"><h4><b>Give your category a name.</b></h4></label>
-                  <input type="text" style="background-color: white;" placeholder="Enter movie Title" name="movieTitle" />
+                  <input type="text" style="background-color: white;" placeholder="Enter a Category Name" name="addCategory" />
                   {{#if movies}}
                   <ul>
                       <li>{{movies.movieTitle}} length {{movies.movieLength}}mins, {{movies.movieYear}} Rating {{movies.movieRating}}</li>
                       {{#each category}}
                       <li>    {{this.addCategory}}</li>
                       {{/each}}
-                      <a href="/addCategory">add a category</a>
                   </ul>
                   {{/if}}
 
