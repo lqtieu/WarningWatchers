@@ -163,6 +163,7 @@ app.get("/movies", async (req, res) => {
   );
   res.render("movies", { movies });
 });
+
 app.post("/movies", async (req, res) => {
   //console.log("Searching for Movie...");
   const db = await dbPromise;
@@ -185,18 +186,23 @@ app.get("/searchMovie", async (req, res) => {
   console.log("movie input", searchMovie);
   const db = await dbPromise;
   if (searchMovie) {
-    const movies = await db.get(
-      `SELECT 
-                movieTitle,
-                movieYear,
-                movieLength,
-                movieRating
-            FROM Movies WHERE id=?`,
-      searchMovie.id
-    );
-    console.log("movie is", movies);
-    res.render("searchMovie", { movies });
-  }
+        const movies = await db.get(
+        `SELECT 
+                    movieTitle,
+                    movieYear,
+                    movieLength,
+                    movieRating
+                FROM Movies WHERE id=?`,
+        searchMovie.id
+        );
+        const category = await db.all(
+            `SELECT
+                addCategory,
+                movieId
+            FROM Category WHERE movieId=?`, searchMovie.id
+        );
+        console.log("movie is", movies);
+        res.render("searchMovie", { movies, category });}
 });
 
 // --- addmovie.handlebars actions ---
@@ -395,20 +401,21 @@ app.get("/cateAdded", async (req, res) => {
 // --- searchMovie.handlebars actions ---
 // FIX QUERY TO SEARCH FOR CATEGORIES
 app.get("/searchCate", async (req, res) => {
-  console.log("movie input", searchMovie);
-  const db = await dbPromise;
-  const movies = await db.get(
-    `
-            SELECT 
-                movieTitle,
-                movieYear,
-                movieLength,
-                movieRating
-            FROM Movies WHERE id=?`,
-    searchMovie.id
-  );
-  //console.log("movie is", movies);
-  res.render("searchCate", { movies });
+    console.log("movie input", searchMovie);
+    const db = await dbPromise;
+    if(searchMovie){
+    const movies = await db.get(
+        `SELECT 
+             movieTitle,
+             movieYear,
+             movieLength,
+             movieRating
+        FROM Movies WHERE id=?`,
+        searchMovie.id
+    );
+    console.log("movie is", movies);
+    res.render("searchCate", { movies });}
+    else {return res.render("searchCate")}
 });
 
 //Gets access to database and runs migration

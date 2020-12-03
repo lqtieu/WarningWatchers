@@ -23,7 +23,7 @@ Page to add categories to the database, but the SECOND PAGE after hitting submit
                   <label for="cate-name"><h4><b>Give your category a name.</b></h4></label>
                   <input type="text" style="background-color: white;" placeholder="Enter a Category Name" name="addCategory" />
           {{#if movies}}
-          <ul>
+          <ul style="padding: 0;">
             <div class="container" style="margin-bottom: auto;">
               <div class="card" style="display:block;">
                 <div class="card-body">
@@ -42,7 +42,7 @@ Page to add categories to the database, but the SECOND PAGE after hitting submit
           </ul>
           {{/if}}
 
-                  <button type="submit" class="registerbtn">Finish</button>
+                  <a type="submit" class="registerbtn" href="/cateAdded">Add category</a>
                 </div>
 
                 </div>
