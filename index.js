@@ -193,32 +193,32 @@ app.get("/team-bio", (req, res) => {
 
     // --- addmovie.handlebars actions ---
     app.get("/addmovie", async (req, res) => {
-    //console.log("Entered the addMovie Page")
-    res.render("addmovie", { user: req.user });
+        //console.log("Entered the addMovie Page")
+        res.render("addmovie", { user: req.user });
     });
     app.post("/addmovie", async (req, res) => {
-    //console.log("Adding a movie right now...");
-    const db = await dbPromise;
-    try {
-        //insert movies into the movies table in database.
-        await db.run(
-        "INSERT INTO Movies (movieTitle, movieLength, movieYear, movieRating) VALUES (?, ?, ?, ?);",
-        req.body.movieTitle,
-        req.body.movieLength,
-        req.body.movieYear,
-        req.body.movieRating
-        );
-        searchMovie = await db.get(
-        "SELECT id FROM Movies WHERE movieTitle=?",
-        req.body.movieTitle
-        );
-        res.redirect("movieAdded");
-    } catch (e) {
-        return res.render("addmovie", {
-        error: "Movie already in database. Please try another movie.",
-        user: req.user,
-        });
-    }
+        //console.log("Adding a movie right now...");
+        const db = await dbPromise;
+        try {
+            //insert movies into the movies table in database.
+            await db.run(
+            "INSERT INTO Movies (movieTitle, movieLength, movieYear, movieRating) VALUES (?, ?, ?, ?);",
+            req.body.movieTitle,
+            req.body.movieLength,
+            req.body.movieYear,
+            req.body.movieRating
+            );
+            searchMovie = await db.get(
+            "SELECT id FROM Movies WHERE movieTitle=?",
+            req.body.movieTitle
+            );
+            res.redirect("movieAdded");
+        } catch (e) {
+            return res.render("addmovie", {
+            error: "Movie already in database. Please try another movie.",
+            user: req.user,
+            });
+        }
     });
 
     // --- movieAdded.handlebars actions ---
@@ -240,13 +240,13 @@ app.get("/team-bio", (req, res) => {
 // ==== CATEGORY & CATEGORY-RELATED PAGES ====
     // --- categories.handlebars actions ---
     app.get("/categories", (req, res) => {
-    res.render("categories");
+        res.render("categories");
     });
 
     // --- addCate.handlebars actions ---
     app.get("/addCate", async (req, res) => {
-    //console.log("Display addCate page")
-    res.render("addCate", { user: req.user });
+        //console.log("Display addCate page")
+        res.render("addCate", { user: req.user });
     });
     app.post("/addCate", async (req, res) => {
     //console.log("Adding a category...")
