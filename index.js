@@ -158,7 +158,6 @@ app.get("/movies", async (req, res) => {
     );
     res.render("movies", { movies });
 });
-
 app.post("/movies", async (req, res) => {
     //console.log("Searching for Movie...");
     const db = await dbPromise;
@@ -256,8 +255,35 @@ app.get("/movieAdded", async (req, res) => {
 
 // ==== CATEGORY & CATEGORY-RELATED PAGES ====
     // --- categories.handlebars actions ---
-    app.get("/categories", (req, res) => {
-        res.render("categories");
+    app.get("/categories", async (req, res) => {
+        //console.log("Displaying Movies Page");
+        const db = await dbPromise;
+        const movies = await db.all(
+            `SELECT
+                    id,
+                    movieTitle,
+                    movieLength,
+                    movieYear,
+                    movieRating
+                    FROM Movies`
+        );
+        res.render("categories", { movies });
+    });
+    app.post("/categories", async (req, res) => {
+        //console.log("Searching for Movie...");
+        const db = await dbPromise;
+        try {
+            searchMovie = await db.get(
+                `SELECT
+                        id
+                    FROM Categories WHERE addCategory=?`,
+                req.body.addCategory
+            );
+            console.log("Category checked", searchCategory);
+            res.redirect("/searchCate");
+        } catch (e) {
+            return res.render("categories", { error: "Movie not found. Please try again." });
+        }
     });
 
     // --- addCate.handlebars actions ---
@@ -327,6 +353,41 @@ app.post('/addCategory', async (req, res) =>{
         res.redirect('/addCategory');
     } catch (e) {return res.render('addCategory', {error: e, user: req.user}); }
 })
+// --- movieAdded.handlebars actions ---
+app.get("/cateAdded", async (req, res) => {
+    //console.log("Added a movie!")
+    const db = await dbPromise;
+    if (searchMovie.id) {
+        const movies = await db.get(
+            "SELECT movieTitle, movieLength, movieYear, movieRating FROM Movies WHERE id=?",
+            searchMovie.id
+        );
+        console.log("movie id added", movies);
+        res.render("cateAdded", { movies });
+    } else {
+        res.render("cateAdded");
+    }
+});
+
+// --- searchMovie.handlebars actions ---
+// FIX QUERY TO SEARCH FOR CATEGORIES
+app.get("/searchCate", async (req, res) => {
+    console.log("movie input", searchMovie);
+    const db = await dbPromise;
+    const movies = await db.get(
+        `
+            SELECT 
+                movieTitle,
+                movieYear,
+                movieLength,
+                movieRating
+            FROM Movies WHERE id=?`,
+        searchMovie.id
+    );
+    console.log("movie is", movies);
+    res.render("searchCate", { movies });
+});
+
 
 //Gets access to database and runs migration
 const setup = async () => {
