@@ -115,12 +115,17 @@ app.get("/addmovie", async (req, res) => {
 
 app.get("/movieAdded", async (req, res) =>{
     const db = await dbPromise;
-    const movies = await db.get('SELECT movieTitle, movieLength, movieYear, movieRating FROM Movies WHERE id=?', searchMovie.id);
-    console.log("moive id added", movies);
-    res.render("movieAdded", {movies});
+    if(searchMovie.id){
+        const movies = await db.get('SELECT movieTitle, movieLength, movieYear, movieRating FROM Movies WHERE id=?', searchMovie.id);
+        console.log("moive id added", movies);
+        res.render("movieAdded", {movies});
+    }
+    else {
+        res.render("movieAdded");
+    }
 })
 
-app.get("/requests", async (req, res) => {
+app.get("/addCate", async (req, res) => {
     //res.render('requests');
     const db = await dbPromise;
     const movies = await db.get('SELECT movieTitle, movieLength, movieYear, movieRating FROM Movies WHERE movieTitle=?', searchMovie);
@@ -132,7 +137,7 @@ app.get("/requests", async (req, res) => {
         FROM Category WHERE movieId=?`, movieID.id
     );
     console.log('category', category);
-    res.render("requests", {category, movies});
+    res.render("addCate", {category, movies});
 });
 
 app.get("/register", (req, res) => {
