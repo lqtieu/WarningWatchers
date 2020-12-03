@@ -48,7 +48,7 @@ app.get("/", async (req, res) => {
 // ==== ACCOUNT PAGE & ACTIONS ====
 app.get("/account", (req, res) => {
     //console.log("Display account page");
-    res.render("account");
+    res.render("account", { user: req.user });
 });
 
 // --- register.handlebars actions ---
