@@ -407,7 +407,7 @@ const setup = async () => {
   await db.migrate();
 
   app.listen(8000, () => {
-    console.log("Listening on port 8080 @ http://localhost:8000");
+    console.log("Listening on port 8000 @ http://localhost:8000");
   });
 };
 
