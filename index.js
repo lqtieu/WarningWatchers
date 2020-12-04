@@ -42,24 +42,20 @@ app.use(async (req, res, next) => {
 
 // ==== HOME PAGE ====
 app.get("/", async (req, res) => {
-  //console.log("Display landing page");
   res.render("home", { user: req.user });
 });
 
 // ==== ACCOUNT PAGE & ACTIONS ====
 app.get("/account", (req, res) => {
-  //console.log("Display account page");
   res.render("account", { user: req.user });
 });
 
 // --- register.handlebars actions ---
 app.get("/register", (req, res) => {
-  //console.log("Display register page");
   res.render("register");
 });
 
 app.post("/register", async (req, res) => {
-  //console.log("Registering user...");
   const db = await dbPromise;
   const { username, email, password, password2 } = req.body;
   if (password === password2) {
@@ -99,7 +95,6 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  //console.log("Logging in user...");
   const db = await dbPromise;
   const { email, password } = req.body;
 
@@ -150,7 +145,6 @@ app.get("/team-bio", (req, res) => {
 // ==== MOVIES & MOVIE-RELATED PAGES ====
 // --- Movies.handlebars actions ---
 app.get("/movies", async (req, res) => {
-  //console.log("Displaying Movies Page");
   const db = await dbPromise;
   const movies = await db.all(
     `SELECT
@@ -165,7 +159,6 @@ app.get("/movies", async (req, res) => {
 });
 
 app.post("/movies", async (req, res) => {
-  //console.log("Searching for Movie...");
   const db = await dbPromise;
   try {
     searchMovie = await db.get(
@@ -207,11 +200,9 @@ app.get("/searchMovie", async (req, res) => {
 
 // --- addmovie.handlebars actions ---
 app.get("/addmovie", async (req, res) => {
-  //console.log("Entered the addMovie Page")
   res.render("addmovie", { user: req.user });
 });
 app.post("/addmovie", async (req, res) => {
-  //console.log("Adding a movie right now...");
   const db = await dbPromise;
   try {
     //insert movies into the movies table in database.
@@ -237,7 +228,6 @@ app.post("/addmovie", async (req, res) => {
 
 // --- movieAdded.handlebars actions ---
 app.get("/movieAdded", async (req, res) => {
-  //console.log("Added a movie!")
   const db = await dbPromise;
   if (searchMovie.id) {
     const movies = await db.get(
@@ -254,7 +244,6 @@ app.get("/movieAdded", async (req, res) => {
 // ==== CATEGORY & CATEGORY-RELATED PAGES ====
 // --- categories.handlebars actions ---
 app.get("/categories", async (req, res) => {
-  //console.log("Displaying Movies Page");
   const db = await dbPromise;
   const movies = await db.all(
     `SELECT
@@ -268,7 +257,6 @@ app.get("/categories", async (req, res) => {
   res.render("categories", { movies });
 });
 app.post("/categories", async (req, res) => {
-  //console.log("Searching for Movie...");
   const db = await dbPromise;
   try {
     searchMovie = await db.get(
@@ -288,7 +276,6 @@ app.post("/categories", async (req, res) => {
 
 // --- addCate.handlebars actions ---
 app.get("/addCate", async (req, res) => {
-  //console.log("Display addCate page")
   console.log("movie input", req.query.movieTitle);
   const db = await dbPromise;
   const movies = await db.get(
@@ -317,7 +304,6 @@ app.get("/addCate", async (req, res) => {
 });
 
 app.post("/addCate", async (req, res) => {
-  //console.log("Adding a category...")
   if (!req.user) {
     return res.redirect("/");
   }
@@ -358,7 +344,6 @@ app.get("/addCategory", async (req, res) => {
         FROM Category WHERE movieId=?`,
     movieID
   );
-  //console.log("category", category);
   res.render("addCategory", { category, movies });
 });
 app.post("/addCategory", async (req, res) => {
@@ -366,7 +351,6 @@ app.post("/addCategory", async (req, res) => {
     return res.redirect("/");
   }
   const db = await dbPromise;
-  //movieID = await db.get('SELECT id FROM Movies WHERE MovieTitle=?', searchMovie);
   console.log("movie ID", movieID);
   try {
     const test = await db.run(
@@ -384,7 +368,6 @@ app.post("/addCategory", async (req, res) => {
 
 // --- cateAdded.handlebars actions ---
 app.get("/cateAdded", async (req, res) => {
-  //console.log("Added a movie!")
   const db = await dbPromise;
   if (movieID) {
     const movies = await db.get(
