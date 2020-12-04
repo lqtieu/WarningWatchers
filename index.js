@@ -376,7 +376,7 @@ app.post("/addCategory", async (req, res) => {
     );
     console.log("test", movieID);
     console.log("test 2", test);
-    res.redirect("/addCategory");
+    res.redirect("/cateAdded");
   } catch (e) {
     return res.render("addCategory", { error: "Category is already in database.", user: req.user });
   }
@@ -386,10 +386,10 @@ app.post("/addCategory", async (req, res) => {
 app.get("/cateAdded", async (req, res) => {
   //console.log("Added a movie!")
   const db = await dbPromise;
-  if (searchMovie.id) {
+  if (movieID) {
     const movies = await db.get(
       "SELECT movieTitle, movieLength, movieYear, movieRating FROM Movies WHERE id=?",
-      searchMovie.id
+      movieID
     );
     console.log("movie id added", movies);
     res.render("cateAdded", { movies });
